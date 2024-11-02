@@ -11,7 +11,7 @@ from fastapi import FastAPI
 
 # FastAPI object
 app = FastAPI()
-xgb_clf = joblib.load(str(root.parent / 'patient_model/trained_models/xgboost-model.pkl'))
+xgb_clf = joblib.load('./patient_model/trained_models/xgboost-model.pkl')
 
 def predict_death_event(age, anaemia, high_blood_pressure, creatinine_phosphokinase, diabetes, ejection_fraction, platelets, sex, serum_creatinine, serum_sodium, smoking, time):
     '''Function to predict survival of patients with heart failure'''
@@ -42,20 +42,19 @@ input_components = [
 output_component = gr.Label(label="Survival Prediction")
 
 
-# Gradio interface to generate UI link
-title = "Patient Survival Prediction"
-description = "Predict survival of patient with heart failure, given their clinical record"
 
-iface = gr.Interface(fn = predict_death_event,
-                         inputs = input_components,
-                         outputs = output_component,
-                         title = title,
-                         description = description,
-                         allow_flagging='never')
-
-iface.launch(share = True)  # server_name="0.0.0.0", server_port = 8001   # Ref: https://www.gradio.app/docs/interface
 
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8001) 
+    # Gradio interface to generate UI link
+    title = "Patient Survival Prediction"
+    description = "Predict survival of patient with heart failure, given their clinical record"
+
+    iface = gr.Interface(fn = predict_death_event,
+                            inputs = input_components,
+                            outputs = output_component,
+                            title = title,
+                            description = description,
+                            allow_flagging='never')
+
+    iface.launch(share = True, server_name="0.0.0.0", server_port = 8001)   # Ref: https://www.gradio.app/docs/interface

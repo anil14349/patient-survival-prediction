@@ -5,7 +5,7 @@ FROM python:3.10
 WORKDIR /patient_model_api
 
 ADD /patient_model_api/requirements.txt .
-ADD /patient_model_api/*.whl .
+#ADD /patient_model/trained_models/xgboost-model.pkl ./patient_model/trained_models/xgboost-model.pkl
 
 # update pip
 RUN pip install --upgrade pip
@@ -13,10 +13,11 @@ RUN pip install --upgrade pip
 # install dependencies
 RUN pip install -r requirements.txt
 
-RUN rm *.whl
+#RUN rm *.whl
 
 # copy application files
 ADD /patient_model_api/app/* ./app/
+ADD /patient_model/trained_models/* ./patient_model/trained_models/
 
 # expose port for application
 EXPOSE 8001
