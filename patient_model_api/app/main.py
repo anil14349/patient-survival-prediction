@@ -25,15 +25,18 @@ def predict_death_event(age, anaemia, high_blood_pressure, creatinine_phosphokin
     
 
 input_components = [
-    gr.Number(label="Age"),
-    gr.Number(label="Creatinine Phosphokinase"),
-    gr.Number(label="Ejection Fraction"),
-    gr.Number(label="Platelets"),
-    gr.Number(label="Serum Creatinine"),
-    gr.Number(label="Serum Sodium"),
-    gr.Checkbox(label="High Blood Pressure"),
+    gr.Slider(1, 100, value=4, label="Age",),
+    gr.Checkbox(label="Anaemia"),
+    gr.Checkbox(label="High blood pressure"),
+    gr.Slider(0,10000,label="Creatinine phosphokinase"),
     gr.Checkbox(label="Diabetes"),
+    gr.Slider(0,200,label="Ejection fraction"),
+    gr.Slider(0,40000000,label="Platelets"),
+    gr.Checkbox(label="Sex"),
+    gr.Slider(0,10000,label="Serum creatinine"),
+    gr.Slider(0,10000,label="Serum sodium"),
     gr.Checkbox(label="Smoking"),
+    gr.Slider(0,10000,label="Time")
 ]
 
 output_component = gr.Label(label="Survival Prediction")
