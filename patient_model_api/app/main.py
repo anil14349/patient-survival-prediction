@@ -7,10 +7,7 @@ sys.path.append(str(root))
 import gradio as gr
 import joblib
 import numpy as np
-from fastapi import FastAPI
 
-# FastAPI object
-app = FastAPI()
 xgb_clf = joblib.load('./patient_model/trained_models/xgboost-model.pkl')
 
 def predict_death_event(age, anaemia, high_blood_pressure, creatinine_phosphokinase, diabetes, ejection_fraction, platelets, sex, serum_creatinine, serum_sodium, smoking, time):
